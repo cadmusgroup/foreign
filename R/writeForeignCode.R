@@ -48,9 +48,7 @@ writeForeignSPSS <- function(df, datafile, codefile, varnames = NULL)
         if(any(lengths > 255L))
             stop("Cannot handle character variables longer than 255")
         lengths <- paste0("(A", lengths, ")")
-        # corrected by PR#15583
-        star <- ifelse(c(TRUE, diff(which(chv) > 1L))," *", " ")
-        dl.varnames[chv] <- paste(star, dl.varnames[chv], lengths)
+        dl.varnames[chv] <- paste(" *", dl.varnames[chv], lengths)
   }
 
     cat("DATA LIST FILE=", adQuote(datafile), " free (\",\")\n",
